@@ -13,7 +13,6 @@
     "http-errors": "^1.8.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.10",
-    "typeorm": "^0.2.41",
     "winston": "^3.5.0"
   },
   "devDependencies": {

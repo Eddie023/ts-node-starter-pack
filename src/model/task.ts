@@ -2,7 +2,7 @@ import { Connection } from 'typeorm';
 import createError from 'http-errors';
 import camelize, { Camelize } from 'camelize-ts';
 
-import TaskEntity from '../entity/Task';
+// import TaskEntity from '../entities/Task';
 import { createDbConnection, logger } from '../core/utils';
 import { GET_ALL_TASKS } from '../queries/get_all_task';
 
@@ -40,7 +40,7 @@ export class Task {
       conn = Task.connection;
     }
 
-    return conn.getRepository(TaskEntity);
+    // return conn.getRepository(TaskEntity);
   }
 
   /**
