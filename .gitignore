@@ -1,0 +1,7 @@
+node_modules/*
+db/*
+dist/*
+yarn-error.log
+*.log
+.env
+ormconfig.json
