@@ -1,13 +1,11 @@
 import * as winston from 'winston';
 
-import { config } from '../config';
-
 const customFormat = winston.format.printf(
   ({ level, message }) => `${new Date(Date.UTC(0, 0, 0, 0, 0))}--[ ${level.toUpperCase()} ]: ${message}`
 );
 
 const logger = winston.createLogger({
-  level: config().logLevel,
+  level: 'info',
   format: winston.format.json(),
   transports: [
     new winston.transports.File({ filename: 'error.log', level: 'error' }),

@@ -1,4 +1,4 @@
-### Ozzou FullStack Developer Assignment
+### TS-NODE-TYPESCRIPT-STARTER-PACK
 
 ## Setup database
 
