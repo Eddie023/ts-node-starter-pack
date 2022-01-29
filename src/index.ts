@@ -1,35 +1,35 @@
-import cors from 'cors';
 import DotEnv from 'dotenv';
-import express from 'express';
+
+import { initApp } from './app/main';
+import { logger } from './core/utils';
+import Config from './core/config/config';
 
 // Set env variable.
 DotEnv.config();
 
-import routes from './routes';
-import { logger } from './core/utils';
-import { config } from './core/config';
+const build = 'dev';
 
-async function bootstrap() {
-  const app = express();
+// TODO: Make structured logging.
 
-  app.use(cors());
-  app.use(express.json());
+const config: Object = {
+  config: Config(),
+  log: logger,
+  prefix: 'TODO',
+};
 
-  // Add app routers.
-  app.use('/', routes);
+/** Entry point for the service */
+(function () {
+  initApp()
 
-  app.use((err: any, req: any, res: any, next: any) => {
-    const { statusCode = 500, message } = err;
-    res.status(statusCode).json({
-      status: 'Error',
-      statusCode,
-      message,
-    });
-  });
+  if (process.env.NODE_ENV === 'production') {
+    process.on('unhandledRejection', (reason, promise) => {
+      console.error('Unhandled Rejection at:', promise, 'reason:', reason)
+    })
 
-  app.listen(config().port, () => {
-    logger.info(`Listening on port ${config().port}...`);
-  });
-}
+    process.on('uncaughtException', (err, origin) => {
+      console.error(`Caught exception: ${err}\n Exception origin: ${origin}`)
+      process.exit(1)
+    })
+  }
+})()
 
-bootstrap();

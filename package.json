@@ -11,6 +11,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "http-errors": "^1.8.1",
+    "knex": "^1.0.1",
+    "objection": "^3.0.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.10",
     "winston": "^3.5.0"
@@ -36,6 +38,10 @@
     "migrate": "npm run typeorm migration:run",
     "rollback": "npm run typeorm migration:revert",
     "format": "prettier --write \"src/**/*.ts\""
+  },
+  "imports": {
+    "app/*": "./src/app/*",
+    "core/*": "./src/core/*"
   },
   "license": "ISC"
 }
