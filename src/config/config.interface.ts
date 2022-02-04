@@ -13,6 +13,8 @@ interface Configuration {
     password: string;
     database: string;
   };
+
+  knex: any;
 }
 
 export default Configuration;

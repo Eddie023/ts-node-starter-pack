@@ -1,5 +1,4 @@
 
-// import TaskEntity from '../entities/Task';
 import { BaseModel, logger } from '../../core/utils';
 
 interface TaskDetails {
@@ -12,25 +11,30 @@ interface TaskDetails {
 
 
 class Task extends BaseModel {
-  static tableName: string = 'task'
+  // This is required. Give the db table name.
+  static get tableName() {
+    return 'todo'
+  }
 
   /**
    * Get all task and it's associated subTasks.
    *
    * @returns {Promise<Success<TaskDetails | string>>}
    */
-  public async getAllTask(): Promise<any> {
+  public static async getAllTask(): Promise<{ data: Task[], message: string }> {
     try {
-      logger.info('Fetching all tasks with associated subTasks');
+      logger.info('fetching all tasks with associated subTasks');
+
+      const todos = await Task.findAll()
 
       return {
-        data: [],
+        data: todos,
         message: 'List of tasks',
       };
     } catch (error) {
-      logger.error('Error fetching all tasks with err: ', error);
+      logger.error('error fetching all tasks with err: ', error);
 
-      throw new Error('Failed to fetch all tasks');
+      throw error
     }
   }
 }

@@ -3,7 +3,6 @@
   "description": "",
   "version": "1.0.0",
   "author": "manish@chaulagain@gmail.com",
-  "type": "module",
   "main": "dist/index.ts",
   "dependencies": {
     "camelize-ts": "^1.0.9",
@@ -35,13 +34,19 @@
     "lint": "eslint . --ext .ts --fix",
     "start": "ts-node-dev src/index.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "migrate": "npm run typeorm migration:run",
     "rollback": "npm run typeorm migration:revert",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "make:migration": "knex --knexfile=knexfile.ts migrate:make -x ts",
+    "migrate:up": "knex --debug --knexfile=knexfile.ts migrate:up",
+    "migrate:latest": "knex --debug --knexfile=knexfile.ts migrate:latest",
+    "rollback:last": "knex --debug --knexfile=knexfile.ts migrate:rollback",
+    "rollback:all": "knex --debug --knexfile=knexfile.ts migrate:rollback --all",
+    "migrate:list": "knex --debug --knexfile=knexfile.ts migrate:list"
   },
   "imports": {
     "app/*": "./src/app/*",
-    "core/*": "./src/core/*"
+    "core/*": "./src/core/*",
+    "config/*": "./src/config/*"
   },
   "license": "ISC"
 }

@@ -1,9 +1,11 @@
 import Knex from 'knex';
-import { config } from '../config';
+
+import logger from './logger';
+import Config from '../../config';
 
 /** getKenxConnection initializes knex connection. */
 export const getKnexConnection = (): any => {
-  const { username, database, password } = config().db;
+  const { username, database, password } = Config().db;
 
   return Knex({
     client: 'postgres',
@@ -11,11 +13,35 @@ export const getKnexConnection = (): any => {
     useNullAsDefault: true,
 
     connection: {
-      userName: username,
+      user: username,
       database: database,
       password: password,
-      port: 5435,
+      port: 5432,
       host: "127.0.0.1",
+    },
+
+    log: {
+      error(message) {
+        console.error('the error is', message)
+      }
     }
   })
+}
+
+/** Check if db connection is working or not by querying db. */
+export const verifyDbConnection = async () => {
+  try {
+    logger.info('resolving db connection...')
+    const knex = getKnexConnection();
+
+    return knex.raw('select 1+1 as result').then(() => logger.info('connected established')).catch((err: any) => {
+      logger.error(`Failed to connect database with error: ${err?.message}`)
+      logger.warn('service shutting down...')
+
+      process.exit(1);
+    })
+  } catch (error) {
+    console.error('failed to connect to db')
+    process.exit(1);
+  }
 }

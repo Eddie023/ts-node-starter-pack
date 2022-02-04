@@ -1,3 +1,8 @@
+import DotEnv from 'dotenv';
+
+// Set env variable.
+DotEnv.config();
+
 import Configuration from './config.interface';
 
 const config = (): Configuration => ({
@@ -15,6 +20,17 @@ const config = (): Configuration => ({
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || '',
   },
+
+  knex: {
+    migrations: {
+      directory: 'app/db/migrations',
+      extensions: 'ts'
+    },
+    seeds: {
+      directory: 'app/db/seeds'
+    }
+
+  }
 });
 
 export default config;

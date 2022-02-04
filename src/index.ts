@@ -1,25 +1,16 @@
 import DotEnv from 'dotenv';
 
 import { initApp } from './app/main';
-import { logger } from './core/utils';
-import Config from './core/config/config';
+import { verifyDbConnection } from './core/utils/knex';
 
 // Set env variable.
 DotEnv.config();
 
-const build = 'dev';
+const build = "dev";
 
-// TODO: Make structured logging.
-
-const config: Object = {
-  config: Config(),
-  log: logger,
-  prefix: 'TODO',
-};
-
-/** Entry point for the service */
-(function () {
-  initApp()
+(async () => {
+  await verifyDbConnection();
+  initApp();
 
   if (process.env.NODE_ENV === 'production') {
     process.on('unhandledRejection', (reason, promise) => {
@@ -32,4 +23,3 @@ const config: Object = {
     })
   }
 })()
-
