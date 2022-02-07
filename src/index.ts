@@ -2,6 +2,7 @@ import DotEnv from 'dotenv';
 
 import { initApp } from './app/main';
 import { verifyDbConnection } from './core/utils/knex';
+import * as Bugsnag from './core/utils/bugsnag';
 
 // Set env variable.
 DotEnv.config();
@@ -9,6 +10,7 @@ DotEnv.config();
 const build = "dev";
 
 (async () => {
+  Bugsnag.initialize()
   await verifyDbConnection();
   initApp();
 
