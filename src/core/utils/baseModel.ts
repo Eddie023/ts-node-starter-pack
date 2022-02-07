@@ -1,4 +1,5 @@
 import { Knex } from 'knex';
+import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 import Objection, { Model, snakeCaseMappers } from 'objection';
 
 import { getKnexConnection } from './knex';
@@ -26,12 +27,12 @@ class BaseModel extends Model {
   }
 
   public static async findById(id: number): Promise<BaseModel | Objection.NotFoundError> {
-    const result = await this.query().findById(2);
+    const result = await this.query().findById(id);
 
     if (!result) {
       throw new Objection.NotFoundError({
         statusCode: 404,
-        message: `Task with id: ${id} not found.`
+        message: getReasonPhrase(StatusCodes.NOT_FOUND)
       })
     }
 
