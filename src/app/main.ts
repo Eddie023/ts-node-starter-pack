@@ -1,4 +1,5 @@
 import cors from 'cors';
+import helmet from 'helmet';
 import express from 'express';
 import Bugsnag from '@bugsnag/js';
 
@@ -11,6 +12,8 @@ import { shouldInitializeBugsang } from '../core/utils/bugsnag';
 export const initApp = () => {
   const middleware = shouldInitializeBugsang() ? Bugsnag.getPlugin('express') : null;
   const app = express();
+
+  app.use(helmet())
 
   // This should be the first middleware in the stack.
   // It can only capture errors in downstream middleware.
