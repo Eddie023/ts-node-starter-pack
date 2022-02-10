@@ -17,3 +17,9 @@ docker-update:
 
 docker-logs:
 	docker-compose -f zarf/docker/development/docker-compose.yml logs -f
+
+docker-logs-api:
+	docker-compose -f zarf/docker/development/docker-compose.yml logs -f api
+
+docker-migrate-latest:
+	docker-compose -f zarf/docker/development/docker-compose.yml exec api npm run migrate:latest
