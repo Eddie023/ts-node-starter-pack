@@ -13,6 +13,7 @@ const config: { [key: string]: Knex.Config } = {
     },
     connection: {
       host: process.env.DB_HOST || 'localhost',
+      port: Number(process.env.DB_PORT) || 5432,
       user: 'todo_admin',
       password: 'todo123',
       database: 'todo_db'

@@ -12,18 +12,24 @@ services:
       - "8000:8000"
     environment:
       DB_HOST: db
+      DB_PORT: 8848
 
   db:
     image: "postgres:latest"
+    expose:
+      - '8848'
     ports:
-      - '5432:5432'
+      - '8848:8848'
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U todo_admin -d todo_db"]
       interval: 10s
       timeout: 4s
       retries: 2
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: 'todo_db'
       POSTGRES_USER: 'todo_admin'
       POSTGRES_PASSWORD: 'todo123'
+    command: -p 8848
 
