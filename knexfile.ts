@@ -12,7 +12,7 @@ const config: { [key: string]: Knex.Config } = {
       max: 10
     },
     connection: {
-      host: 'localhost',
+      host: process.env.DB_HOST || 'localhost',
       user: 'todo_admin',
       password: 'todo123',
       database: 'todo_db'

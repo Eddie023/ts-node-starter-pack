@@ -5,7 +5,7 @@ import Config from '../../config';
 
 /** getKenxConnection initializes knex connection. */
 export const getKnexConnection = (): any => {
-  const { username, database, password } = Config().db;
+  const { username, database, password, host } = Config().db;
 
   return Knex({
     client: 'postgres',
@@ -17,7 +17,7 @@ export const getKnexConnection = (): any => {
       database: database,
       password: password,
       port: 5432,
-      host: "127.0.0.1",
+      host: host,
     },
 
     log: {

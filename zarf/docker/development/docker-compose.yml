@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  api:
+    container_name: 'todo-api'
+    build:
+      context: ../../../
+      dockerfile: $PWD/zarf/docker/development/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+
+  db:
+    image: "postgres:latest"
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U todo_admin -d todo_db"]
+      interval: 10s
+      timeout: 4s
+      retries: 2
+    environment:
+      POSTGRES_DB: 'todo_db'
+      POSTGRES_USER: 'todo_admin'
+      POSTGRES_PASSWORD: 'todo123'
+
