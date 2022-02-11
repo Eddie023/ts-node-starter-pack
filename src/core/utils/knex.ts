@@ -33,5 +33,5 @@ export const initDatabase = async () => {
   logger.info('resolving db connection...');
   const knex = getKnexConnection();
 
-  return knex.raw('select 1+1 as result');
+  return knex.raw('SELECT 1+1 AS result');
 };
