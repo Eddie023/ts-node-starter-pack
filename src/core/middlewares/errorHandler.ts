@@ -1,12 +1,12 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 import { getReasonPhrase, ReasonPhrases, StatusCodes } from 'http-status-codes';
 
-import { logger } from "../utils";
-import { dbErrorHandler } from "../utils/objection";
+import { logger } from '../utils';
+import { dbErrorHandler } from '../utils/objection';
 
 interface ErrorResponse {
-  code: StatusCodes,
-  message: ReasonPhrases | string
+  code: StatusCodes;
+  message: ReasonPhrases | string;
 }
 
 const parseError = (err: any): ErrorResponse => {
@@ -15,9 +15,9 @@ const parseError = (err: any): ErrorResponse => {
 
   return {
     code: StatusCodes.INTERNAL_SERVER_ERROR,
-    message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)
-  }
-}
+    message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR),
+  };
+};
 
 /**
  * Parse error and handle different cases of error.
@@ -34,8 +34,7 @@ const ErrorHandler = (err: any, req: Request, res: Response, _: NextFunction): v
   dbErrorHandler(err, res);
   const error = parseError(err);
 
-  res.status(error.code).json(error)
-}
-
+  res.status(error.code).json(error);
+};
 
 export default ErrorHandler;

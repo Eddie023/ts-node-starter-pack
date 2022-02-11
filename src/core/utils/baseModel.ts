@@ -23,7 +23,7 @@ class BaseModel extends Model {
    * @returns {Knex}
    */
   public static getConnection(): Knex {
-    return getKnexConnection()
+    return getKnexConnection();
   }
 
   public static async findById(id: number): Promise<BaseModel | Objection.NotFoundError> {
@@ -32,11 +32,11 @@ class BaseModel extends Model {
     if (!result) {
       throw new Objection.NotFoundError({
         statusCode: 404,
-        message: getReasonPhrase(StatusCodes.NOT_FOUND)
-      })
+        message: getReasonPhrase(StatusCodes.NOT_FOUND),
+      });
     }
 
-    return result
+    return result;
   }
 
   /**
@@ -45,8 +45,8 @@ class BaseModel extends Model {
    * @returns {Promise<BaseModel[]>}
    */
   public static async findAll(): Promise<BaseModel[]> {
-    return this.query()
+    return this.query();
   }
 }
 
-export default BaseModel
+export default BaseModel;

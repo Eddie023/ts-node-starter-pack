@@ -24,13 +24,12 @@ const config = (): Configuration => ({
   knex: {
     migrations: {
       directory: 'app/db/migrations',
-      extensions: 'ts'
+      extensions: 'ts',
     },
     seeds: {
-      directory: 'app/db/seeds'
-    }
-
-  }
+      directory: 'app/db/seeds',
+    },
+  },
 });
 
 export default config;

@@ -22,26 +22,16 @@ export const getKnexConnection = (): any => {
 
     log: {
       error(message) {
-        console.error('the error is', message)
-      }
-    }
-  })
-}
+        console.error('the error is', message);
+      },
+    },
+  });
+};
 
 /** Check if db connection is working or not by querying db. */
-export const verifyDbConnection = async () => {
-  try {
-    logger.info('resolving db connection...')
-    const knex = getKnexConnection();
+export const initDatabase = async () => {
+  logger.info('resolving db connection...');
+  const knex = getKnexConnection();
 
-    return knex.raw('select 1+1 as result').then(() => logger.info('connected established')).catch((err: any) => {
-      logger.error(`Failed to connect database with error: ${err?.message}`)
-      logger.warn('service shutting down...')
-
-      process.exit(1);
-    })
-  } catch (error) {
-    console.error('failed to connect to db')
-    process.exit(1);
-  }
-}
+  return knex.raw('select 1+1 as result');
+};

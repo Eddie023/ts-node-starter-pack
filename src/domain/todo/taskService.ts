@@ -1,5 +1,5 @@
-import Task from "./taskModel"
+import Task from './taskModel';
 
 export const getAllTask = async () => {
-  return Task.getAllTask()
-}
+  return Task.getAllTask();
+};

@@ -1,4 +1,3 @@
-
 import { BaseModel, logger } from '../../core/utils';
 
 interface TaskDetails {
@@ -9,11 +8,10 @@ interface TaskDetails {
   subTask: TaskDetails[];
 }
 
-
 class Task extends BaseModel {
   // This is required. Give the db table name.
   static get tableName() {
-    return 'todo'
+    return 'todo';
   }
 
   /**
@@ -21,11 +19,11 @@ class Task extends BaseModel {
    *
    * @returns {Promise<Success<TaskDetails | string>>}
    */
-  public static async getAllTask(): Promise<{ data: Task[], message: string }> {
+  public static async getAllTask(): Promise<{ data: Task[]; message: string }> {
     try {
       logger.info('fetching all tasks with associated subTasks');
 
-      const todos = await Task.findAll()
+      const todos = await Task.findAll();
 
       return {
         data: todos,
@@ -34,9 +32,9 @@ class Task extends BaseModel {
     } catch (error) {
       logger.error('error fetching all tasks with err: ', error);
 
-      throw error
+      throw error;
     }
   }
 }
 
-export default Task
+export default Task;

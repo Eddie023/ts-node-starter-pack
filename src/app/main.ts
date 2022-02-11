@@ -13,11 +13,11 @@ export const initApp = () => {
   const middleware = shouldInitializeBugsang() ? Bugsnag.getPlugin('express') : null;
   const app = express();
 
-  app.use(helmet())
+  app.use(helmet());
 
   // This should be the first middleware in the stack.
   // It can only capture errors in downstream middleware.
-  middleware && app.use(middleware.requestHandler)
+  middleware && app.use(middleware.requestHandler);
 
   app.use(cors());
   app.use(express.json());
@@ -26,11 +26,10 @@ export const initApp = () => {
   app.use('/api/v1/', version1Routes);
 
   // Error Middleware
-  middleware && app.use(middleware?.errorHandler)
+  middleware && app.use(middleware?.errorHandler);
   app.use(errorHandler);
 
   app.listen(Config().port, () => {
-    logger.info(`Listening on port ${Config().port}...`);
+    logger.info(`server started on http://localhost:${Config().port}...`);
   });
-}
-
+};
