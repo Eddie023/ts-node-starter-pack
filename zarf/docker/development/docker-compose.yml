@@ -8,6 +8,8 @@ services:
       dockerfile: $PWD/zarf/docker/development/Dockerfile
     depends_on:
       - db
+    volumes:
+      - $PWD/src:/usr/app/src
     ports:
       - "8000:8000"
     environment:
@@ -16,6 +18,7 @@ services:
 
   db:
     image: "postgres:latest"
+    restart: always
     expose:
       - '8848'
     ports:

@@ -9,9 +9,11 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY ["./src", "./src"]
 COPY ["knexfile.ts", "tsconfig.json", ".gitignore", ".eslintignore", ".eslintrc.js", ".env", "./"]
 
-EXPOSE 4000
+# Copy unnecessary for development because we mount volumes to src while developing.
+# COPY ["./src", "./src"]
+
+# EXPOSE 4000
 
 CMD ["npm", "run", "start"]
