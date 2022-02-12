@@ -1,13 +1,5 @@
 import { BaseModel, logger } from '../../core/utils';
 
-interface TaskDetails {
-  id: number;
-  title: string;
-  status: string;
-  createdAt: string;
-  subTask: TaskDetails[];
-}
-
 class Task extends BaseModel {
   // This is required. Give the db table name.
   static get tableName() {

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { getReasonPhrase, ReasonPhrases, StatusCodes } from 'http-status-codes';
 
 import { logger } from '../utils';
+import { notify } from '../utils/bugsnag';
 import { dbErrorHandler } from '../utils/objection';
 
 interface ErrorResponse {
@@ -11,7 +12,7 @@ interface ErrorResponse {
 
 const parseError = (err: any): ErrorResponse => {
   // Notify unhandled errors to bugsang.
-  // notify(err)
+  notify(err);
 
   return {
     code: StatusCodes.INTERNAL_SERVER_ERROR,

@@ -8,10 +8,9 @@ import { logger } from './core/utils';
 // set env variable
 DotEnv.config();
 
-const build = 'dev';
-
 /**
  * TODO:
+ *
  * 1. Write tests
  * 2. Joi Middleware for Validation
  * 3. Kubernetes Setup
@@ -21,6 +20,8 @@ const build = 'dev';
  * 7. Session/Cookies
  * 8. CI/CD setup
  * 9. Add husky
+ * 10. Add TestCoverage
+ * 11. API documentation
  */
 
 // load app only if db is alive and kicking

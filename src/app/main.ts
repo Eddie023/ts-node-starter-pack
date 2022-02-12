@@ -29,7 +29,14 @@ export const initApp = () => {
   middleware && app.use(middleware?.errorHandler);
   app.use(errorHandler);
 
-  app.listen(Config().port, () => {
+  const server = app.listen(Config().port, () => {
     logger.info(`server started on http://localhost:${Config().port}...`);
+  });
+
+  process.on('SIGTERM', () => {
+    logger.debug(`SIGTERM signal received: closing HTTP server`);
+    server.close(() => {
+      logger.debug(`HTTP server closed`);
+    });
   });
 };
