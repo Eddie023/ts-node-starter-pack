@@ -1,11 +1,25 @@
-export function up(knex: any): any {
-  return knex.schema.createTable('table_name', (table: any) => {
-    table.increments('id').primary();
+import { Knex } from 'knex';
 
-    table.timestamps(true, true);
+/**
+ * Create new table <table_name>.
+ *
+ * @param  {Knex} knex
+ * @returns {PromisePromise<Knex.SchemaBuilder>}
+ */
+export async function up(knex: Knex): Promise<Knex.SchemaBuilder> {
+  return knex.schema.createTable('table_name', (t) => {
+    t.increments('id').primary();
+
+    t.timestamps(true, true);
   });
 }
 
-export function down(knex: any): any {
+/**
+ * Rollback migration. Drop table <table_name>.
+ *
+ * @param  {Knex} knex
+ * @returns {PromisePromise<Knex.SchemaBuilder>}
+ */
+export async function down(knex: Knex): Promise<Knex.SchemaBuilder> {
   return knex.schema.dropTable('table_name');
 }

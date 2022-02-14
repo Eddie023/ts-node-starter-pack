@@ -20,6 +20,8 @@ class BaseModel extends Model {
   }
 
   /**
+   * Get db connection.
+   *
    * @returns {Knex}
    */
   public static getConnection(): Knex {
@@ -45,7 +47,17 @@ class BaseModel extends Model {
    * @returns {Promise<BaseModel[]>}
    */
   public static async findAll(): Promise<BaseModel[]> {
-    return this.query();
+    return await this.query();
+  }
+
+  /**
+   * Insert new row to db.
+   *
+   * @param data T
+   * @returns {Promise<BaseModel>}
+   */
+  public static async insert<T>(data: T): Promise<BaseModel> {
+    return this.query().insert(data);
   }
 }
 
